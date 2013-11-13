@@ -4,6 +4,29 @@
 class Maidenhead
 
   #
+  # Verify that the provided Maidenhead locator string is valid.
+  #
+  def self.valid_maidenhead?(location)
+    return false unless location.is_a?String
+    return false unless location.length >= 2
+    return false unless (location.length % 2) == 0
+
+    length = location.length / 2
+    length.times do |counter|
+      grid = location[counter * 2, 2]
+      if (counter == 0)
+        return false unless grid =~ /[a-rA-R]{2}/
+      elsif (counter % 2) == 0
+        return false unless grid =~ /[a-xA-X]{2}/
+      else
+        return false unless grid =~ /[0-9]{2}/
+      end
+    end
+
+    true
+  end
+
+  #
   # Convert from a Maidenhead locator string to latitude and longitude.
   # Location may be between 1 and 5 grids in size (2 to 10 characters).
   # Longer values may work, but accuracy is not guaranteed as latitude
@@ -12,6 +35,10 @@ class Maidenhead
   # For each grid, an arbitrary but repeatable latitude and longitude
   # is returned.
   def self.to_latlon(location)
+
+    unless valid_maidenhead?(location)
+      raise ArgumentError.new("Location is not a valid Maidenhead Locator System string")
+    end
 
     length = location.length / 2
     while (length < 5)

@@ -57,8 +57,66 @@ class TestMaidenhead < Minitest::Test
   end
 
   def test_convert_JJ00aa
-    lat, lon = Maidenhead.to_latlon('JJ00aa')
+    lat, lon = Maidenhead.to_latlon('JJ00aa00aa')
     assert_equal lat, 0
     assert_equal lon, 0
+  end
+
+  def test_edges_0
+    maidenhead = Maidenhead.to_maidenhead(-90, -180, 5)
+    assert_equal 'AA00aa00aa', maidenhead
+  end
+
+  def test_edges_1
+    maidenhead = Maidenhead.to_maidenhead(90, -180, 5)
+    assert_equal 'AS00aa00aa', maidenhead
+  end
+
+  def test_edges_2
+    maidenhead = Maidenhead.to_maidenhead(90, 180, 5)
+    assert_equal 'SS00aa00aa', maidenhead
+  end
+
+  def test_edges_3
+    maidenhead = Maidenhead.to_maidenhead(-90, 180, 5)
+    assert_equal 'SA00aa00aa', maidenhead
+  end
+
+  def test_throws_for_invalid_maidenhead
+    assert_raises(ArgumentError) do
+      Maidenhead.to_latlon('A')
+    end
+  end
+
+  def test_valid_maidenhead
+    matrix = {
+      'AA' => true,
+      'AA00' => true,
+      'AA00AA' => true,
+      'Rr99XX' => true,
+      'rR99Xx99' => true,
+      'RR99xX99Xx' => true,
+      'RR99xX99xX' => true,
+
+      12 => false,
+      '' => false,
+      nil => false,
+
+      'A' => false,
+      'A1' => false,
+      '00' => false,
+      'AA0' => false,
+      'AAAA' => false,
+      'AA0A' => false,
+      'SS99' => false,
+    }
+
+    matrix.each do |locator, expected_result|
+      if expected_result
+        assert Maidenhead.valid_maidenhead?(locator), "#{locator} should be valid"
+      else
+        refute Maidenhead.valid_maidenhead?(locator), "#{locator} should not be valid"
+      end
+    end
   end
 end
