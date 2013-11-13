@@ -1,4 +1,16 @@
+##
+# Conver between latitude and longitude coordinates the the Maidenhead
+# Location System coordinates.
 class Maidenhead
+
+  #
+  # Convert from a Maidenhead location string to latitude and longitude.
+  # Location may be between 1 and 5 grids in size (2 to 10 characters).
+  # Longer values may work, but accuracy is not guaranteed as latitude
+  # and longitude values returned are rounded ot 6 decimal places.
+  #
+  # For each grid, an arbitrary but repeatable latitude and longitude
+  # is returned.
   def self.to_latlon(location)
 
     length = location.length / 2
@@ -40,6 +52,11 @@ class Maidenhead
     [ (lat - 90).round(6), (lon - 180).round(6) ]
   end
 
+  #
+  # Convert from latitude and longitude to a Maidenhead coordinate string.
+  # Latitude should be between -90 and 90, and longitude should be between
+  # -180 and 180.  Precision defaults to 5 blocks, which returns 10 characters.
+  # More precise coordinates may work, but accuracy is not guaranteed.
   def self.to_maidenhead(lat, lon, precision = 5)
     locator = ''
 
