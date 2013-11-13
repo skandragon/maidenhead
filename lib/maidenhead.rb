@@ -1,10 +1,10 @@
 ##
-# Conver between latitude and longitude coordinates the the Maidenhead
-# Location System coordinates.
+# Easily convert between latitude and longitude coordinates the the Maidenhead
+# Locator System coordinates.
 class Maidenhead
 
   #
-  # Convert from a Maidenhead location string to latitude and longitude.
+  # Convert from a Maidenhead locator string to latitude and longitude.
   # Location may be between 1 and 5 grids in size (2 to 10 characters).
   # Longer values may work, but accuracy is not guaranteed as latitude
   # and longitude values returned are rounded ot 6 decimal places.
@@ -53,7 +53,7 @@ class Maidenhead
   end
 
   #
-  # Convert from latitude and longitude to a Maidenhead coordinate string.
+  # Convert from latitude and longitude to a Maidenhead locator string.
   # Latitude should be between -90 and 90, and longitude should be between
   # -180 and 180.  Precision defaults to 5 blocks, which returns 10 characters.
   # More precise coordinates may work, but accuracy is not guaranteed.

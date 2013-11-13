@@ -55,4 +55,10 @@ class TestMaidenhead < Minitest::Test
     maidenhead = Maidenhead.to_maidenhead(53.593923, -1.022569, 1)
     assert_equal 'IO', maidenhead
   end
+
+  def test_convert_JJ00aa
+    lat, lon = Maidenhead.to_latlon('JJ00aa')
+    assert_equal lat, 0
+    assert_equal lon, 0
+  end
 end
