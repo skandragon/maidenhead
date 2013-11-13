@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "maidenhead"
   gem.homepage = "http://github.com/skandragon/maidenhead"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Maidenhead Locator System conversion}
+  gem.description = %Q{Convert between latitude/longitude and Maidenhead Locator System strings}
   gem.email = "explorer@flame.org"
   gem.authors = ["Michael Graff"]
   # dependencies defined in Gemfile
