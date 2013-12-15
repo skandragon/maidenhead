@@ -13,4 +13,9 @@ group :development do
   gem "jeweler", "~> 1.8.7"
   gem "guard"
   gem 'guard-minitest'
+
+  platforms :rbx do
+#    gem 'racc'
+    gem 'rubysl'
+  end
 end
