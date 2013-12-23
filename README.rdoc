@@ -1,6 +1,8 @@
 = maidenhead
 
 {<img src="https://travis-ci.org/skandragon/maidenhead.png?branch=master" alt="Build Status" />}[https://travis-ci.org/skandragon/maidenhead]
+{<img src="https://codeclimate.com/github/skandragon/maidenhead.png" />}[https://codeclimate.com/github/skandragon/maidenhead]
+{<img src="https://codeclimate.com/github/skandragon/top_n.png" />}[https://codeclimate.com/github/skandragon/top_n]
 
 This gem converts between latitude and longitude coordinates and the
 Maidenhead Location System coordinates, with various degrees of accuracy.
