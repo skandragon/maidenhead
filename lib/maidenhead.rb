@@ -82,35 +82,47 @@ class Maidenhead
   # ArgumentError will be raised.
   #
   def lat=(pos)
-    pos = pos.to_f
-    if pos < -90.0 or pos > 90.0
-      raise ArgumentError.new("lat must be between -90.0 and +90.0")
-    end
-
-    @lat = pos
+    @lat = range_check("lat", 90.0, pos)
   end
 
+  def range_check(target, range, pos)
+    pos = pos.to_f
+    range = range.to_f
+    if pos < -range or pos > range
+      raise ArgumentError.new("#{target} must be between -#{range} and +#{range}")
+    end
+    pos
+  end
+
+  #
+  # Retrieve the latitude, usually post-conversion from a locator string.
+  # The result is rounded to 6 decimal places.
+  #
   def lat
     @lat.round(6)
   end
 
   #
-  # Set the latitude.  Values must be between -90.0 and +90.0 or an
+  # Set the longitude.  Values must be between -180.0 and +180.0 or an
   # ArgumentError will be raised.
   #
   def lon=(pos)
-    pos = pos.to_f
-    if pos < -180.0 or pos > 180.0
-      raise ArgumentError.new("lat must be between -180.0 and +180.0")
-    end
-
-    @lon = pos
+    @lon = range_check("lon", 180.0, pos)
   end
 
+  #
+  # Retrieve the longitude, usually post-conversion from a locator string.
+  # The result is rounded to 6 decimal places.
+  #
   def lon
     @lon.round(6)
   end
 
+  #
+  # Set the desired precision when converting from a latitude / longitude
+  # to a maidenhead locator.  This specifies the number of groups to use,
+  # usually 2 through 5, which results in 4 through 10 characters.
+  #
   def precision=(value)
     @precision = value
   end
@@ -119,6 +131,10 @@ class Maidenhead
     @precision
   end
 
+  #
+  # Convert from a latitude / longitude position, which must have been
+  # set via #lat= and #lon=, to a locator.
+  #
   def locator
     @locator = ''
 
