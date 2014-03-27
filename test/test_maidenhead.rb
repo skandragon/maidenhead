@@ -1,34 +1,29 @@
 require 'helper'
 
 class TestMaidenhead < Minitest::Test
-  def test_convert_from_maidenhead_5
+  def test_convert_from_maidenhead_IO93lo72hn
     lat, lon = Maidenhead.to_latlon('IO93lo72hn')
-    assert_equal 53.593924, lat
-    assert_equal -1.022569, lon
+    assert_equal [ 53.593924, -1.022569 ], [ lat, lon ]
   end
 
-  def test_convert_from_maidenhead_4
+  def test_convert_from_maidenhead_IO93lo72
     lat, lon = Maidenhead.to_latlon('IO93lo72')
-    assert_equal 53.593576, lat
-    assert_equal -1.021181, lon
+    assert_equal [ 53.593576, -1.021181 ], [ lat, lon ]
   end
 
-  def test_convert_from_maidenhead_3
+  def test_convert_from_maidenhead_IO93lo
     lat, lon = Maidenhead.to_latlon('IO93lo')
-    assert_equal 53.606076, lat
-    assert_equal -1.037847, lon
+    assert_equal [ 53.606076, -1.037847 ], [ lat, lon ]
   end
 
-  def test_convert_from_maidenhead_2
+  def test_convert_from_maidenhead_IO93
     lat, lon = Maidenhead.to_latlon('IO93')
-    assert_equal 53.481076, lat
-    assert_equal -1.037847, lon
+    assert_equal [ 53.481076, -1.037847 ], [ lat, lon ]
   end
 
-  def test_convert_from_maidenhead_1
+  def test_convert_from_maidenhead_IO
     lat, lon = Maidenhead.to_latlon('IO')
-    assert_equal 55.481076, lat
-    assert_equal -9.037847, lon
+    assert_equal [ 55.481076, -9.037847 ], [ lat, lon ]
   end
 
   def test_convert_to_maidenhead_5
