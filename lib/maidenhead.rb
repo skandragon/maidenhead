@@ -85,15 +85,6 @@ class Maidenhead
     @lat = range_check("lat", 90.0, pos)
   end
 
-  def range_check(target, range, pos)
-    pos = pos.to_f
-    range = range.to_f
-    if pos < -range or pos > range
-      raise ArgumentError.new("#{target} must be between -#{range} and +#{range}")
-    end
-    pos
-  end
-
   #
   # Retrieve the latitude, usually post-conversion from a locator string.
   # The result is rounded to 6 decimal places.
@@ -208,5 +199,13 @@ class Maidenhead
 
   def n2l(number)
     (number + 97).chr
+  end
+
+  def range_check(target, range, pos)
+    pos = pos.to_f
+    if pos < -range or pos > range
+      raise ArgumentError.new("#{target} must be between -#{range} and +#{range}")
+    end
+    pos
   end
 end

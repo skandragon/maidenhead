@@ -114,4 +114,32 @@ class TestMaidenhead < Minitest::Test
       end
     end
   end
+
+  def test_instance_lat_out_of_range_negative_raises
+    assert_raises(ArgumentError) do
+      maidenhead = Maidenhead.new
+      maidenhead.lat = -90.1
+    end
+  end
+
+  def test_instance_lat_out_of_range_positive_raises
+    assert_raises(ArgumentError) do
+      maidenhead = Maidenhead.new
+      maidenhead.lat = 90.1
+    end
+  end
+
+  def test_instance_lon_out_of_range_negative_raises
+    assert_raises(ArgumentError) do
+      maidenhead = Maidenhead.new
+      maidenhead.lon = -180.1
+    end
+  end
+
+  def test_instance_lon_out_of_range_positive_raises
+    assert_raises(ArgumentError) do
+      maidenhead = Maidenhead.new
+      maidenhead.lon = 180.1
+    end
+  end
 end
